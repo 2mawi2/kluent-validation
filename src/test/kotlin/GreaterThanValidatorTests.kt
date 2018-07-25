@@ -2,12 +2,12 @@ import org.junit.Assert.assertFalse
 import org.junit.Assert.assertTrue
 import org.junit.Test
 
+
 class GreaterThanValidatorTests {
     data class Tree(
             val size: Int = 9,
             val nullableSize: Int? = 9,
-            val floatSize: Float = 9.0F,
-            val treeName: String = ""
+            val floatSize: Float = 9.0F
     )
 
     val validator: TreeValidator = TreeValidator()
