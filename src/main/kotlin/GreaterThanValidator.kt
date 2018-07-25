@@ -1,10 +1,13 @@
-class NotEmptyValidator : PropertyValidator {
+class GreaterThanValidator(val num: Int) : PropertyValidator {
     override fun validate(property: Any?): Boolean {
         return when (property) {
             null -> false
-            is String -> property.isNotBlank()
+            is Float -> property > num.toFloat()
+            is Int -> property > num
             is List<*> -> property.isNotEmpty()
             else -> throw UnsupportedTypeError("Type: ${(property.javaClass)} is not supported")
         }
     }
 }
+
+

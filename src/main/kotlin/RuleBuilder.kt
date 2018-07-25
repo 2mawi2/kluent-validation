@@ -1,8 +1,8 @@
 class RuleBuilder<T, TProperty>(var rule: PropertyRule<T, TProperty>, var parent: AbstractValidator<T>) {
     val validators: ArrayList<PropertyValidator> = ArrayList()
 
-    fun greaterThen(num: Int) {
-        setValidator(GreaterThenValidator(num))
+    fun greaterThan(num: Int) {
+        setValidator(GreaterThanValidator(num))
     }
 
     fun notEmpty() {

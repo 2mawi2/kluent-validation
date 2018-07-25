@@ -18,8 +18,8 @@ class NotEmptyValidatorTests {
             }
         }
 
-        assertFalse(CustomerValidator().validate(Customer()))
-        assertTrue(CustomerValidator().validate(Customer(firstName = "not empty")))
+        assertFalse(CustomerValidator().validate(Customer()).isValid)
+        assertTrue(CustomerValidator().validate(Customer(firstName = "not empty")).isValid)
     }
 
     @Test
@@ -30,7 +30,7 @@ class NotEmptyValidatorTests {
             }
         }
 
-        assertFalse(CustomerValidator().validate(Customer(firstName = "  ")))
+        assertFalse(CustomerValidator().validate(Customer(firstName = "  ")).isValid)
     }
 
     @Test
@@ -41,7 +41,7 @@ class NotEmptyValidatorTests {
             }
         }
 
-        assertFalse(CustomerValidator().validate(Customer()))
+        assertFalse(CustomerValidator().validate(Customer()).isValid)
     }
 
     @Test
@@ -52,7 +52,7 @@ class NotEmptyValidatorTests {
             }
         }
 
-        assertFalse(CustomerValidator().validate(Customer()))
-        assertTrue(CustomerValidator().validate(Customer(list = listOf(1, 2))))
+        assertFalse(CustomerValidator().validate(Customer()).isValid)
+        assertTrue(CustomerValidator().validate(Customer(list = listOf(1, 2))).isValid)
     }
 }

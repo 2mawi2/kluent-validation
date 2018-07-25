@@ -11,7 +11,11 @@ open class AbstractValidator<T> {
         return RuleBuilder(rule, this)
     }
 
-    fun validate(customer: T): Boolean {
-        return rules.map { it.validate(customer) }.all { it }
+    fun validate(customer: T): ValidationResult {
+        return ValidationResult(
+                isValid = rules.map { it.validate(customer) }.all { it }
+        )
     }
 }
+
+data class ValidationResult(val isValid: Boolean)
