@@ -4,11 +4,7 @@ import org.junit.Test
 
 
 class NotEmptyValidatorTests {
-    data class Customer(
-            val firstName: String = "",
-            val nullableLastName: String? = null,
-            val list: List<Int> = listOf()
-    )
+
 
     @Test
     fun `should validate string to be empty`() {

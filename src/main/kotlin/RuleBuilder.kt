@@ -5,16 +5,13 @@ class RuleBuilder<T, TProperty>(var rule: PropertyRule<T, TProperty>, var parent
         parent.completeRule(rule, validator)
     }
 
+    fun greaterThan(greater: Number) = setValidator(GreaterThanValidator(greater))
 
-    fun greaterThan(num: Int) {
-        setValidator(GreaterThanValidator(num))
-    }
+    fun notEmpty() = setValidator(NotEmptyValidator())
 
-    fun notEmpty() {
-        setValidator(NotEmptyValidator())
-    }
+    fun smallerThan(smaller: Number) = setValidator(SmallerThanValidator(smaller))
 
-    fun smallerThan(num: Int) {
-        setValidator(SmallerThanValidator(num))
-    }
+    fun equalTo(equal: Any) = setValidator(EqualToValidator(equal))
+
+    fun notEqualTo(notEqual: Any) = setValidator(NotEqualToValidator(notEqual))
 }

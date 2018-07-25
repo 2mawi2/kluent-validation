@@ -2,32 +2,26 @@ import org.junit.Assert
 import org.junit.Test
 
 class SmallerThanTests {
-    data class Tree(
-            val size: Int = 7,
-            val nullableSize: Int? = 7,
-            val floatSize: Float = 7.0F
-    )
-
     val validator: TreeValidator = TreeValidator()
 
     class TreeValidator : AbstractValidator<Tree>() {
         init {
-            ruleFor { it.size }.smallerThan(8)
-            ruleFor { it.nullableSize }.smallerThan(8)
-            ruleFor { it.floatSize }.smallerThan(8)
+            ruleFor { it.size }.smallerThan(10)
+            ruleFor { it.nullableSize }.smallerThan(10)
+            ruleFor { it.floatSize }.smallerThan(10)
         }
     }
 
 
     @Test
     fun `should fail when value greater than specified`() {
-        val isValid = validator.validate(Tree(size = 9)).isValid
+        val isValid = validator.validate(Tree(size = 11)).isValid
         Assert.assertFalse(isValid)
     }
 
     @Test
     fun `should fail when value equal to specified`() {
-        val isValid = validator.validate(Tree(size = 8)).isValid
+        val isValid = validator.validate(Tree(size = 10)).isValid
         Assert.assertFalse(isValid)
     }
 
@@ -45,7 +39,7 @@ class SmallerThanTests {
 
     @Test
     fun `should fail when float value is greater then int`() {
-        val isValid = validator.validate(Tree(floatSize = 8.111F)).isValid
+        val isValid = validator.validate(Tree(floatSize = 10.111F)).isValid
         Assert.assertFalse(isValid)
     }
 }
