@@ -1,3 +1,3 @@
 interface PropertyValidator {
-    fun validate(property: Any): Boolean
+    fun validate(property: Any?): Boolean
 }

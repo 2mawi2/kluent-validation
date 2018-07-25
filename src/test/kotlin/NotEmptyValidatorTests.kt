@@ -10,7 +10,6 @@ class NotEmptyValidatorTests {
             val list: List<Int> = listOf()
     )
 
-
     @Test
     fun `should validate string to be empty`() {
         class CustomerValidator : AbstractValidator<Customer>() {
@@ -24,15 +23,25 @@ class NotEmptyValidatorTests {
     }
 
     @Test
-    fun `should fail when nullable value is null`() {
+    fun `should fail when string is whitespace`() {
         class CustomerValidator : AbstractValidator<Customer>() {
             init {
                 ruleFor { it.firstName }.notEmpty()
             }
         }
 
+        assertFalse(CustomerValidator().validate(Customer(firstName = "  ")))
+    }
+
+    @Test
+    fun `should fail when nullable property is null`() {
+        class CustomerValidator : AbstractValidator<Customer>() {
+            init {
+                ruleFor { it.nullableLastName }.notEmpty()
+            }
+        }
+
         assertFalse(CustomerValidator().validate(Customer()))
-        assertTrue(CustomerValidator().validate(Customer(firstName = "not empty")))
     }
 
     @Test
