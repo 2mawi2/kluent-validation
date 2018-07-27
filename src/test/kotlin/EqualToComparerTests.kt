@@ -1,3 +1,4 @@
+import org.amshove.kluent.shouldBe
 import org.junit.Assert
 import org.junit.Test
 
@@ -14,12 +15,12 @@ class EqualToComparerTests {
 
     @Test
     fun `should check for equality when not a number`() {
-        Assert.assertFalse(validator.validate(Tree(name = "WrongName")).isValid)
+        validator.validate(Tree(name = "WrongName")).isValid.shouldBe(false)
     }
 
     @Test
     fun `should pass when equal float`() {
-        Assert.assertTrue(validator.validate(Tree(floatSize = 9.0F)).isValid)
+        validator.validate(Tree(floatSize = 9.0F)).isValid.shouldBe(true)
     }
 
     @Test

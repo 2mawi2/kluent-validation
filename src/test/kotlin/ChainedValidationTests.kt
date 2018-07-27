@@ -1,3 +1,4 @@
+import org.amshove.kluent.shouldBe
 import org.junit.Assert.assertFalse
 import org.junit.Assert.assertTrue
 import org.junit.Test
@@ -17,12 +18,12 @@ class ChainedValidationTests {
     @Test
     fun `should pass when combined chained result is true`() {
         val result = validator.validate(Tree(size = 9))
-        assertTrue(result.isValid)
+        result.isValid.shouldBe(true)
     }
 
     @Test
     fun `should fail when if one of the validation rules fail`() {
         val result = validator.validate(Tree(size = 10))
-        assertFalse(result.isValid)
+        result.isValid.shouldBe(true)
     }
 }
