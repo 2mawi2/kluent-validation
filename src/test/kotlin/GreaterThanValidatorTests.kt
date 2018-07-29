@@ -1,6 +1,4 @@
 import org.amshove.kluent.shouldBe
-import org.junit.Assert.assertFalse
-import org.junit.Assert.assertTrue
 import org.junit.Test
 
 class GreaterThanValidatorTests {
@@ -8,9 +6,9 @@ class GreaterThanValidatorTests {
 
     class TreeValidator : AbstractValidator<Tree>() {
         init {
-            ruleFor { it.size } greaterThan 8
-            ruleFor { it.nullableSize } `greater than` 8
-            ruleFor { it.floatSize }.greaterThan(8)
+            validate { it.size } greaterThan 8
+            validate { it.nullableSize } `greater than` 8
+            validate { it.floatSize }.greaterThan(8)
         }
     }
 

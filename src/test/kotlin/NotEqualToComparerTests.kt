@@ -1,5 +1,4 @@
 import org.amshove.kluent.shouldBe
-import org.junit.Assert
 import org.junit.Test
 
 class NotEqualToComparerTests {
@@ -7,9 +6,9 @@ class NotEqualToComparerTests {
 
     class TreeValidator : AbstractValidator<Tree>() {
         init {
-            ruleFor { it.size } notEqualTo 9
-            ruleFor { it.floatSize } `not equal to` 8.0
-            ruleFor { it.name }.notEqualTo("WrongName")
+            validate { it.size } notEqualTo 9
+            validate { it.floatSize } `not equal to` 8.0
+            validate { it.name }.notEqualTo("WrongName")
         }
     }
 

@@ -4,33 +4,53 @@ import org.junit.Test
 
 class ConditionValidationTests {
 
-    class TreeValidator : AbstractValidator<Tree>() {
+    class ConditionedValidator : AbstractValidator<Tree>() {
         init {
-            ruleFor { it.size }.greaterThan(4).whenTrue { it.name == "FirstName" }
-            ruleFor { it.floatSize }.greaterThan(4).whenTrue { it.name == "FirstName" }.whenTrue { it.nullableSize != null }
+            validate { it.size }.greaterThan(4).whenTrue { it.name == "FirstName" }
+            validate { it.floatSize }.greaterThan(4).whenTrue { it.name == "FirstName" }.whenTrue { it.nullableSize != null }
         }
     }
 
-    val validator = TreeValidator()
+    class InverseConditionedValidator : AbstractValidator<Tree>() {
+        init {
+            validate { it.size }.greaterThan(4).unless { it.name == "FirstName" }
+        }
+    }
+
+    private val conditionedValidator = ConditionedValidator()
+    private val inverseValidator = InverseConditionedValidator()
 
     @Test
-    fun `should validate when condition is true`() {
-        validator.validate(Tree(size = 3, name = "FirstName")).isValid.shouldBe(false)
+    fun `should validate positive when inverse condition is true`() {
+        inverseValidator.validate(Tree(size = 3, name = "FirstName")).isValid.shouldBe(true)
     }
 
     @Test
-    fun `should not validate when condition is false`() {
-        validator.validate(Tree(size = 3, name = "FalseCondition")).isValid.shouldBe(true)
+    fun `should validate negative when inverse condition is false`() {
+        inverseValidator.validate(Tree(size = 3, name = "FalseCondition")).isValid.shouldBe(false)
+    }
+
+
+    @Test
+    fun `should validate negative when condition is true`() {
+        conditionedValidator.validate(Tree(size = 3, name = "FirstName")).isValid.shouldBe(false)
     }
 
     @Test
-    fun `should validate when all conditions are true`() {
-        validator.validate(Tree(floatSize = 3.0f, name = "FirstName", nullableSize = 3)).isValid.shouldBe(false)
+    fun `should not validate positive when condition is false`() {
+        conditionedValidator.validate(Tree(size = 3, name = "FalseCondition")).isValid.shouldBe(true)
     }
 
     @Test
-    fun `should not validate when one of many conditions is false`() {
-        validator.validate(Tree(floatSize = 3.0f, name = "FirstName", nullableSize = null)).isValid.shouldBe(true)
+    fun `should validate negative when all conditions are true`() {
+        conditionedValidator.validate(Tree(floatSize = 3.0f, name = "FirstName", nullableSize = 3)).isValid.shouldBe(false)
+    }
+
+    @Test
+    fun `should not validate positive when one of many conditions is false`() {
+        conditionedValidator.validate(Tree(floatSize = 3.0f, name = "FirstName", nullableSize = null)).isValid.shouldBe(true)
     }
 }
+
+
 

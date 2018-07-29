@@ -6,6 +6,10 @@ class WhenTrueCondition<T>(private val condition: (T) -> Boolean) : Condition<T>
     override fun validate(entity: T): Boolean = condition(entity)
 }
 
+class UnlessCondition<T>(private val condition: (T) -> Boolean) : Condition<T> {
+    override fun validate(entity: T): Boolean = condition(entity).not()
+}
+
 open class AbstractValidator<T> {
     val rules: ArrayList<ValidationRule<T>> = ArrayList()
     val conditions: ArrayList<Condition<T>> = ArrayList()
@@ -18,7 +22,7 @@ open class AbstractValidator<T> {
         conditions.add(condition)
     }
 
-    protected fun <TProperty> ruleFor(expression: (T) -> TProperty): RuleBuilder<T, TProperty> {
+    protected fun <TProperty> validate(expression: (T) -> TProperty): RuleBuilder<T, TProperty> {
         val rule = PropertyRule(expression)
         rules.add(rule)
         return RuleBuilder(rule, this)

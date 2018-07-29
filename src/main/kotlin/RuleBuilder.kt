@@ -21,6 +21,10 @@ infix fun <T, TProperty> RuleBuilder<T, TProperty>.whenTrue(expression: (T) -> B
     return setCondition(WhenTrueCondition(expression))
 }
 
+infix fun <T, TProperty> RuleBuilder<T, TProperty>.unless(expression: (T) -> Boolean): RuleBuilder<T, TProperty> {
+    return setCondition(UnlessCondition(expression))
+}
+
 infix fun <T, TProperty> RuleBuilder<T, TProperty>.greaterThan(greater: Number): RuleBuilder<T, TProperty> {
     return setValidator(GreaterThanValidator(greater))
 }

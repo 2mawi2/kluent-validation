@@ -1,5 +1,4 @@
 import org.amshove.kluent.shouldBe
-import org.junit.Assert
 import org.junit.Test
 
 class EqualToComparerTests {
@@ -7,9 +6,9 @@ class EqualToComparerTests {
 
     class TreeValidator : AbstractValidator<Tree>() {
         init {
-            ruleFor { it.size } equalTo 9
-            ruleFor { it.floatSize } `equal to` (9.0)
-            ruleFor { it.name }.equalTo("FirstName")
+            validate { it.size } equalTo 9
+            validate { it.floatSize } `equal to` (9.0)
+            validate { it.name }.equalTo("FirstName")
         }
     }
 
