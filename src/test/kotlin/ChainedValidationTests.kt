@@ -15,14 +15,12 @@ class ChainedValidationTests {
 
     @Test
     fun `should pass when combined chained result is true`() {
-        val result = validator.validate(Tree(size = 9))
-        result.isValid.shouldBe(true)
+        validator.validate(Tree(size = 9)).shouldBe(true)
     }
 
     @Test
     fun `should fail when one of the validation rules fail`() {
-        val result = validator.validate(Tree(size = 10))
-        result.isValid.shouldBe(false)
+        validator.validate(Tree(size = 10)).shouldBe(false)
     }
 }
 

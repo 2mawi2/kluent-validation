@@ -1,3 +1,4 @@
+import org.amshove.kluent.shouldBe
 import org.junit.Assert
 import org.junit.Test
 
@@ -14,27 +15,27 @@ class NotEqualToComparerTests {
 
     @Test
     fun `should check for quality when not a number`() {
-        Assert.assertFalse(validator.validate(Tree(name = "FirstName")).isValid)
+        validator.validate(Tree(name = "FirstName")).isValid.shouldBe(false)
     }
 
     @Test
     fun `should not pass when not equal float`() {
-        Assert.assertFalse(validator.validate(Tree(floatSize = 8.0F)).isValid)
+        validator.validate(Tree(floatSize = 8.0F)).isValid.shouldBe(false)
     }
 
     @Test
     fun `should fail when not equal float`() {
-        Assert.assertFalse(validator.validate(Tree(floatSize = 3.0F)).isValid)
+        validator.validate(Tree(floatSize = 3.0F)).isValid.shouldBe(false)
     }
 
     @Test
     fun `should pass when not equal integer`() {
-        Assert.assertTrue(validator.validate(Tree(size = 8)).isValid)
+        validator.validate(Tree(size = 8)).isValid.shouldBe(true)
     }
 
     @Test
     fun `should fail when equal integer`() {
-        Assert.assertFalse(validator.validate(Tree(size = 9)).isValid)
+        validator.validate(Tree(size = 9)).isValid.shouldBe(false)
     }
 
     //TODO Extend for Equality with other Properties

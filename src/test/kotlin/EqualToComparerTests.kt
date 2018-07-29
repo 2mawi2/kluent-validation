@@ -25,17 +25,17 @@ class EqualToComparerTests {
 
     @Test
     fun `should fail when not equal float`() {
-        Assert.assertFalse(validator.validate(Tree(floatSize = 3.0F)).isValid)
+        validator.validate(Tree(floatSize = 3.0F)).isValid.shouldBe(false)
     }
 
     @Test
     fun `should pass when equal integer`() {
-        Assert.assertTrue(validator.validate(Tree(size = 9)).isValid)
+        validator.validate(Tree(size = 9)).isValid.shouldBe(true)
     }
 
     @Test
     fun `should fail when not equal integer`() {
-        Assert.assertFalse(validator.validate(Tree(size = 3)).isValid)
+        validator.validate(Tree(size = 3)).isValid.shouldBe(false)
     }
 
     //TODO Extend for Equality with other Properties

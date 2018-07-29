@@ -1,3 +1,4 @@
+import org.amshove.kluent.shouldBe
 import org.junit.Assert
 import org.junit.Test
 
@@ -15,31 +16,26 @@ class SmallerThanTests {
 
     @Test
     fun `should fail when value greater than specified`() {
-        val isValid = validator.validate(Tree(size = 11)).isValid
-        Assert.assertFalse(isValid)
+        validator.validate(Tree(size = 11)).isValid.shouldBe(false)
     }
 
     @Test
     fun `should fail when value equal to specified`() {
-        val isValid = validator.validate(Tree(size = 10)).isValid
-        Assert.assertFalse(isValid)
+        validator.validate(Tree(size = 10)).isValid.shouldBe(false)
     }
 
     @Test
     fun `should pass when value smaller than specified`() {
-        val isValid = validator.validate(Tree(size = 7)).isValid
-        Assert.assertTrue(isValid)
+        validator.validate(Tree(size = 7)).isValid.shouldBe(true)
     }
 
     @Test
     fun `should fail when nullable property is null`() {
-        val isValid = validator.validate(Tree(nullableSize = null)).isValid
-        Assert.assertFalse(isValid)
+        validator.validate(Tree(nullableSize = null)).isValid.shouldBe(false)
     }
 
     @Test
     fun `should fail when float value is greater then int`() {
-        val isValid = validator.validate(Tree(floatSize = 10.111F)).isValid
-        Assert.assertFalse(isValid)
+        validator.validate(Tree(floatSize = 10.111F)).isValid.shouldBe(false)
     }
 }
