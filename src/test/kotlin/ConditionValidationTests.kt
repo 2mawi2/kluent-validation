@@ -1,4 +1,4 @@
-import org.amshove.kluent.shouldBe
+import org.amshove.kluent.shouldEqual
 import org.junit.Test
 
 
@@ -22,33 +22,32 @@ class ConditionValidationTests {
 
     @Test
     fun `should validate positive when inverse condition is true`() {
-        inverseValidator.validate(Tree(size = 3, name = "FirstName")).isValid.shouldBe(true)
+        inverseValidator.validate(Tree(size = 3, name = "FirstName")).isValid.shouldEqual(true)
     }
 
     @Test
     fun `should validate negative when inverse condition is false`() {
-        inverseValidator.validate(Tree(size = 3, name = "FalseCondition")).isValid.shouldBe(false)
+        inverseValidator.validate(Tree(size = 3, name = "FalseCondition")).isValid.shouldEqual(false)
     }
-
 
     @Test
     fun `should validate negative when condition is true`() {
-        conditionedValidator.validate(Tree(size = 3, name = "FirstName")).isValid.shouldBe(false)
+        conditionedValidator.validate(Tree(size = 3, name = "FirstName")).isValid.shouldEqual(false)
     }
 
     @Test
     fun `should not validate positive when condition is false`() {
-        conditionedValidator.validate(Tree(size = 3, name = "FalseCondition")).isValid.shouldBe(true)
+        conditionedValidator.validate(Tree(size = 3, name = "FalseCondition")).isValid.shouldEqual(true)
     }
 
     @Test
     fun `should validate negative when all conditions are true`() {
-        conditionedValidator.validate(Tree(floatSize = 3.0f, name = "FirstName", nullableSize = 3)).isValid.shouldBe(false)
+        conditionedValidator.validate(Tree(floatSize = 3.0f, name = "FirstName", nullableSize = 3)).isValid.shouldEqual(false)
     }
 
     @Test
     fun `should not validate positive when one of many conditions is false`() {
-        conditionedValidator.validate(Tree(floatSize = 3.0f, name = "FirstName", nullableSize = null)).isValid.shouldBe(true)
+        conditionedValidator.validate(Tree(floatSize = 3.0f, name = "FirstName", nullableSize = null)).isValid.shouldEqual(true)
     }
 }
 

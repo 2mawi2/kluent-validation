@@ -1,4 +1,4 @@
-import org.amshove.kluent.shouldBe
+import org.amshove.kluent.shouldEqual
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.ValueSource
 
@@ -17,13 +17,13 @@ class ChainedValidationTests {
     @ParameterizedTest
     @ValueSource(ints = [10, 11, 12, 13, 14])
     fun `should pass when using mustBe`(value: Int) {
-        validator.validate(Tree(size = value)).isValid.shouldBe(true)
+        validator.validate(Tree(size = value)).isValid.shouldEqual(true)
     }
 
     @ParameterizedTest
     @ValueSource(ints = [7, 8, 9, 15, 16])
     fun `should fail when one of the mustBe validation rules fail`(value: Int) {
-        validator.validate(Tree(size = value)).isValid.shouldBe(false)
+        validator.validate(Tree(size = value)).isValid.shouldEqual(false)
     }
 }
 

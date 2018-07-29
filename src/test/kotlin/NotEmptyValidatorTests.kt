@@ -1,4 +1,4 @@
-import org.amshove.kluent.shouldBe
+import org.amshove.kluent.shouldEqual
 import org.junit.Test
 
 
@@ -11,8 +11,8 @@ class NotEmptyValidatorTests {
             }
         }
 
-        CustomerValidator().validate(Customer()).isValid.shouldBe(false)
-        CustomerValidator().validate(Customer(firstName = "not empty")).isValid.shouldBe(true)
+        CustomerValidator().validate(Customer()).isValid.shouldEqual(false)
+        CustomerValidator().validate(Customer(firstName = "not empty")).isValid.shouldEqual(true)
     }
 
     @Test
@@ -23,7 +23,7 @@ class NotEmptyValidatorTests {
             }
         }
 
-        CustomerValidator().validate(Customer(firstName = "  ")).isValid.shouldBe(false)
+        CustomerValidator().validate(Customer(firstName = "  ")).isValid.shouldEqual(false)
     }
 
     @Test
@@ -34,7 +34,7 @@ class NotEmptyValidatorTests {
             }
         }
 
-        CustomerValidator().validate(Customer()).isValid.shouldBe(false)
+        CustomerValidator().validate(Customer()).isValid.shouldEqual(false)
     }
 
     @Test
@@ -45,7 +45,7 @@ class NotEmptyValidatorTests {
             }
         }
 
-        CustomerValidator().validate(Customer()).isValid.shouldBe(false)
-        CustomerValidator().validate(Customer(list = listOf(1, 2))).isValid.shouldBe(true)
+        CustomerValidator().validate(Customer()).isValid.shouldEqual(false)
+        CustomerValidator().validate(Customer(list = listOf(1, 2))).isValid.shouldEqual(true)
     }
 }
