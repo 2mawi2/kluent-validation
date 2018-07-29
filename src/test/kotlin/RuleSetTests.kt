@@ -5,7 +5,7 @@ class RuleSetTests {
     class TreeValidator : AbstractValidator<Tree>() {
         init {
             ruleFor { it.size }.ruleSet {
-                greaterThan(8)
+                this `greater than` 8 //infix notation in ruleSet only works with this in Kotlin
                 smallerThan(11)
             }.equalTo(9)
         }
