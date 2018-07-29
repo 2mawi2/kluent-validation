@@ -7,8 +7,8 @@ class EqualToComparerTests {
 
     class TreeValidator : AbstractValidator<Tree>() {
         init {
-            ruleFor { it.size }.equalTo(9)
-            ruleFor { it.floatSize }.equalTo(9.0)
+            ruleFor { it.size } equalTo 9
+            ruleFor { it.floatSize } `equal to` (9.0)
             ruleFor { it.name }.equalTo("FirstName")
         }
     }

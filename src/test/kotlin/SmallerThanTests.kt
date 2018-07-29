@@ -7,8 +7,8 @@ class SmallerThanTests {
 
     class TreeValidator : AbstractValidator<Tree>() {
         init {
-            ruleFor { it.size }.smallerThan(10)
-            ruleFor { it.nullableSize }.smallerThan(10)
+            ruleFor { it.size } smallerThan 10
+            ruleFor { it.nullableSize } `smaller than` 10
             ruleFor { it.floatSize }.smallerThan(10)
         }
     }

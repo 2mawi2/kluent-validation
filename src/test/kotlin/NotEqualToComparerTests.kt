@@ -7,8 +7,8 @@ class NotEqualToComparerTests {
 
     class TreeValidator : AbstractValidator<Tree>() {
         init {
-            ruleFor { it.size }.notEqualTo(9)
-            ruleFor { it.floatSize }.notEqualTo(8.0)
+            ruleFor { it.size } notEqualTo 9
+            ruleFor { it.floatSize } `not equal to` 8.0
             ruleFor { it.name }.notEqualTo("WrongName")
         }
     }

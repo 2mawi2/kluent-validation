@@ -8,8 +8,8 @@ class GreaterThanValidatorTests {
 
     class TreeValidator : AbstractValidator<Tree>() {
         init {
-            ruleFor { it.size }.greaterThan(8)
-            ruleFor { it.nullableSize }.greaterThan(8)
+            ruleFor { it.size } greaterThan 8
+            ruleFor { it.nullableSize } `greater than` 8
             ruleFor { it.floatSize }.greaterThan(8)
         }
     }
