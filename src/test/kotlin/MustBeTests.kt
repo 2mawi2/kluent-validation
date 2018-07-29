@@ -1,15 +1,16 @@
 import org.amshove.kluent.shouldBe
 import org.junit.Test
 import org.junit.jupiter.params.ParameterizedTest
+import org.junit.jupiter.params.provider.CsvSource
 import org.junit.jupiter.params.provider.ValueSource
 
-
-class ChainedValidationTests {
-
+class MustBeTests {
     class TreeValidator : AbstractValidator<Tree>() {
         init {
-            ruleFor { it.size } `greater than` 8 smallerThan 15
-            ruleFor { it.size } `not equal to` 9
+            ruleFor { it.size }.mustBe {
+                this `greater than` 8 //infix notation in mustBe only works with this in Kotlin
+                smallerThan(15)
+            } notEqualTo 9
         }
     }
 

@@ -1,8 +1,21 @@
+interface Condition<T> {
+    fun validate(entity: T): Boolean
+}
+
+class WhenTrueCondition<T>(private val condition: (T) -> Boolean) : Condition<T> {
+    override fun validate(entity: T): Boolean = condition(entity)
+}
+
 open class AbstractValidator<T> {
     val rules: ArrayList<ValidationRule<T>> = ArrayList()
+    val conditions: ArrayList<Condition<T>> = ArrayList()
 
-    fun <TProperty> completeRule(rule: PropertyRule<T, TProperty>, validator: PropertyValidator) {
+    fun <TProperty> setValidator(rule: PropertyRule<T, TProperty>, validator: PropertyValidator) {
         rules.first { it == rule }.validators.add(validator)
+    }
+
+    fun addCondition(condition: Condition<T>) {
+        conditions.add(condition)
     }
 
     protected fun <TProperty> ruleFor(expression: (T) -> TProperty): RuleBuilder<T, TProperty> {
@@ -11,11 +24,19 @@ open class AbstractValidator<T> {
         return RuleBuilder(rule, this)
     }
 
-    fun validate(customer: T): ValidationResult {
+    fun validate(entity: T): ValidationResult {
+        var isValid = true
+
+        if (conditions.isEmpty() || conditions.map { it.validate(entity) }.all { it }) {
+            isValid = rules.map { it.validate(entity) }.all { it }
+        }
+
         return ValidationResult(
-                isValid = rules.map { it.validate(customer) }.all { it }
+                isValid = isValid
         )
     }
+
+
 }
 
 data class ValidationResult(val isValid: Boolean)
