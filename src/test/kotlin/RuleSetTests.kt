@@ -1,28 +1,27 @@
 import org.amshove.kluent.shouldBe
 import org.junit.Test
 
-
-class ChainedValidationTests {
-
+class RuleSetTests {
     class TreeValidator : AbstractValidator<Tree>() {
         init {
-            ruleFor { it.size }.greaterThan(8).smallerThan(11)
-            ruleFor { it.size }.equalTo(9)
+            ruleFor { it.size }.ruleSet {
+                greaterThan(8)
+                smallerThan(11)
+            }.equalTo(9)
         }
     }
 
     val validator = TreeValidator()
 
     @Test
-    fun `should pass when combined chained result is true`() {
+    fun `should pass when using ruleSet`() {
         val result = validator.validate(Tree(size = 9))
         result.isValid.shouldBe(true)
     }
 
     @Test
-    fun `should fail when one of the validation rules fail`() {
+    fun `should fail when one of the ruleSet validation rules fail`() {
         val result = validator.validate(Tree(size = 10))
         result.isValid.shouldBe(false)
     }
 }
-
